@@ -1,4 +1,4 @@
-package neu.practice.controller;
+package neu.practice.dto;
 
 import neu.practice.entity.User;
 
