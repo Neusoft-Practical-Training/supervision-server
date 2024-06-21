@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: supervision-server
+
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/supervision?useSSL=false&serverTimezone=UTC
+        username: root
+        password: 1234
+
