@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS `users` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id` INTEGER NOT NULL COMMENT '自增主键',
+    `id` INTEGER NOT NULL AUTO_INCREMENT COMMENT '自增主键',
     `login_code` VARCHAR(255) NOT NULL COMMENT '对于公众监督员使用其手机号，其余用户尽量使用其手机号，若冲突，再做一定处理',
     `password` VARCHAR(255) NOT NULL COMMENT '6-16位',
     `tel` VARCHAR(255) NOT NULL,
@@ -9,12 +8,13 @@ CREATE TABLE IF NOT EXISTS `users` (
     `role` ENUM('0', '1', '2') NOT NULL COMMENT '枚举（0:管理员，2:公众监督员，3:网格员）',
     `age` INTEGER NOT NULL,
     `remarks` VARCHAR(255) COMMENT '非必需',
-    `status` JSON NOT NULL COMMENT '布尔（0：不可用，默认为1：可用）',
+    `status` INTEGER NOT NULL COMMENT '布尔（0：不可用，默认为1：可用）',
     `avatar` VARCHAR(255) NOT NULL COMMENT 'base64格式',
     `create_time` VARCHAR(255) NOT NULL,
     `update_time` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 CREATE TABLE IF NOT EXISTS `admins` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
