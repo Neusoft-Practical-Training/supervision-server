@@ -3,6 +3,8 @@ package neu.practice.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import neu.practice.entity.User;
 import neu.practice.mapper.UserMapper;
+import neu.practice.service.AdminService;
+import neu.practice.service.GridMemberService;
 import neu.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +18,20 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+    private AdminService adminService;
+    private GridMemberService gridMemberService;
 
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
-        userService.login(user);
+        //判断用户身份
+        User account = userService.findByLoginCode(user);
+        if (account.getRole() == 1) {
+            adminService.login(user.getLogin_code(), user.getPassword());
+        }else if (account.getRole() == 2) {
+            userService.login(user.getLogin_code(), user.getPassword());
+        }else if (account.getRole() == 3) {
+            gridMemberService.login(user.getLogin_code(), user.getPassword());
+        }
 
         Result result = Result.builder()
                 .code(1)
@@ -28,13 +40,5 @@ public class LoginController {
                 .build();
         return result;
     }
-
-    @PostMapping("/register")
-    public Result register(@RequestBody User user) {
-        userService.register(user);
-
-        return null;
-    }
-
 
 }

@@ -1,14 +1,23 @@
 package neu.practice.controller;
 
 import neu.practice.entity.Supervisor;
+import neu.practice.entity.User;
+import neu.practice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/supervisor")
 public class SupervisorController {
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/register")
-    public Result register(@RequestBody Supervisor supervisor) {
-        System.out.println("supervisor = " + supervisor);
+    public Result register(@RequestBody User user) {
+
+        userService.register(user);
+
+        System.out.println("supervisor = " + user);
         Result result = Result.builder()
                 .code(1)
                 .data(null)
@@ -18,8 +27,16 @@ public class SupervisorController {
     }
 
     @PostMapping("/update")
-    public Result update(@RequestBody Supervisor supervisor) {
-        System.out.println("supervisor = " + supervisor);
+    public Result update(@RequestBody User user) {
+
+        boolean flag = userService.updateById(user);
+        if (flag) {
+            System.out.println("Record updated successfully.");
+        } else {
+            System.out.println("Failed to update record.");
+        }
+
+        System.out.println("supervisor = " + user);
         Result result = Result.builder()
                 .code(1)
                 .data(null)
@@ -30,6 +47,7 @@ public class SupervisorController {
 
     @PostMapping("/feedback")
     public Result feedback() {
+
         Result result = Result.builder()
                 .code(1)
                 .data(null)
@@ -40,6 +58,7 @@ public class SupervisorController {
 
     @PostMapping("/feedback_info/{page}")
     public Result feedbackInfo(@PathVariable int page) {
+
         Result result = Result.builder()
                 .code(1)
                 .data(null)

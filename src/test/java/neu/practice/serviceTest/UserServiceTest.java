@@ -15,7 +15,7 @@ public class UserServiceTest {
         User user = new User();
         user.setLogin_code("string");
         user.setPassword("string");
-        User account = userService.login(user);
+        User account = userService.login(user.getLogin_code(), user.getPassword());
         System.out.println(account);
     }
 }
