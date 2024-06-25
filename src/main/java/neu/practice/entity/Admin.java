@@ -7,6 +7,7 @@ import lombok.Data;
 @TableName("admins")
 public class Admin extends User {
     private Integer id;
+    private Integer user_id;
     private String province_id;
     private String city_id;
     private Integer permission;

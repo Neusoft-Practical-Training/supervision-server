@@ -15,8 +15,6 @@ CREATE TABLE IF NOT EXISTS `users` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-//admin&gridmembers 需要加一个自增的userid，新增admin和gridmember也需要在user表中加一个用户权限为对应值
-
 CREATE TABLE IF NOT EXISTS `admins` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NOT NULL COMMENT '主键&外键：users/user_id',
@@ -102,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `aqiAssignment` (
     `address` VARCHAR(255) NOT NULL,
     `assign_date` VARCHAR(255) NOT NULL,
     `assign_time` VARCHAR(255) NOT NULL,
-    `cross_domain` JSON NOT NULL COMMENT '布尔类型（默认为0:未跨域，1:跨域）',
+    `cross_domain` INTEGER NOT NULL COMMENT '布尔类型（默认为0:未跨域，1:跨域）',
     `completed` ENUM('0', '1', '2', '3', '4', '5') NOT NULL COMMENT '枚举（默认为0：未完成，1：已完成，2：跨域请求中，3：跨域请求拒绝，4：跨域已受理，5：跨域任务完成）',
     `remarks` VARCHAR(255) COMMENT '非必需',
     PRIMARY KEY (`id`)

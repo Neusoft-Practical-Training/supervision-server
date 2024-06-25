@@ -1,4 +1,8 @@
 package neu.practice.common.enums;
 
-public class RoleEnum {
+public enum RoleEnum {
+    USER,
+    ADMIN,
+    SUPERVISOR,
+    GRIDMEMBER
 }

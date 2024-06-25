@@ -3,7 +3,6 @@ package neu.practice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import neu.practice.entity.Admin;
-import neu.practice.entity.User;
 import neu.practice.mapper.AdminMapper;
 import neu.practice.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
