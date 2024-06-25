@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `tel` VARCHAR(255) NOT NULL,
     `name` VARCHAR(255) NOT NULL COMMENT '用户真实姓名',
     `gender` ENUM('0', '1', '2') NOT NULL DEFAULT '0' COMMENT '枚举（默认为0:未知，1:男，2:女）',
-    `role` ENUM('0', '1', '2') NOT NULL COMMENT '枚举（0:管理员，2:公众监督员，3:网格员）',
+    `role` ENUM('0', '1', '2') NOT NULL COMMENT '枚举（1:管理员，2:公众监督员，3:网格员）',
     `age` INTEGER NOT NULL,
     `remarks` VARCHAR(255) COMMENT '非必需',
     `status` INTEGER NOT NULL COMMENT '布尔（0：不可用，默认为1：可用）',
@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+//admin&gridmembers 需要加一个自增的userid，新增admin和gridmember也需要在user表中加一个用户权限为对应值
 
 CREATE TABLE IF NOT EXISTS `admins` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `grimMembers` (
+CREATE TABLE IF NOT EXISTS `gridMembers` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NOT NULL COMMENT '主键&外键：users/user_id',
     `province_id` VARCHAR(255) NOT NULL COMMENT '外键：provinces/province_id',
