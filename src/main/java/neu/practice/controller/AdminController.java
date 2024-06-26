@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
     @PostMapping("/assign")
     public Result assign(){
+
         Result result = Result.builder()
                 .code(1)
                 .data(null)
