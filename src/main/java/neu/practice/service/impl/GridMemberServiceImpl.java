@@ -22,10 +22,6 @@ public class GridMemberServiceImpl extends ServiceImpl<GridMemberMapper, GridMem
         QueryWrapper<GridMember> queryWrapper = new QueryWrapper<>();
         queryWrapper.allEq(Map.of("login_code", login_code));
         GridMember account = gridMemberMapper.selectOne(queryWrapper);
-//        if (account == null) {
-//            return null;
-//        }
-
         return account;
     }
 }

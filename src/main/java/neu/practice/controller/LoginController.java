@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 public class LoginController {
 
@@ -32,10 +30,9 @@ public class LoginController {
         }else if (account.getRole() == 3) {
             gridMemberService.login(user.getLogin_code(), user.getPassword());
         }
-
         Result result = Result.builder()
                 .code(1)
-                .data(null)
+                .data(account)
                 .message("login controller")
                 .build();
         return result;

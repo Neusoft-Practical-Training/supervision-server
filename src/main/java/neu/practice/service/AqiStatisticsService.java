@@ -5,5 +5,5 @@ import neu.practice.entity.AqiFeedback;
 import neu.practice.entity.AqiStatistics;
 
 public interface AqiStatisticsService extends IService<AqiStatistics> {
-    public void initAqiStatistics(AqiStatistics aqiStatistics);
+    public void confirm(AqiStatistics aqiStatistics);
 }

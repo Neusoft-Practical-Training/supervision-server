@@ -24,17 +24,10 @@ public class AqiController {
         //分页查询
         IPage<Aqi> p = new Page<>(1, 10);
         IPage<Aqi> aqiPage = aqiService.page(p); // 调用 page 方法
-        //
         List<Aqi> afList = aqiPage.getRecords();
-        long total = aqiPage.getTotal();
-        System.out.println("Total records: " + total);
-        for (Aqi aqi : afList) {
-            System.out.println("Aqi: " + aqi);
-        }
-
         Result result = Result.builder()
                 .code(1)
-                .data(null)
+                .data(afList)
                 .message("get aqi")
                 .build();
         return result;

@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AqiServiceImpl extends ServiceImpl<AqiMapper, Aqi> implements AqiService {
 
-    @Autowired
-    private AqiMapper aqiMapper;
-
-
 
 }
 

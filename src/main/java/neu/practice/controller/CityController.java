@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityController {
     @GetMapping("/{province_id}")
     public Result cities(@PathVariable int province_id){
+
         Result result = Result.builder()
                 .code(1)
                 .data(null)

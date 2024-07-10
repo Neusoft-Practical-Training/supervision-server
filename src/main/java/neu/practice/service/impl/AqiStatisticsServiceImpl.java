@@ -13,8 +13,12 @@ import org.springframework.stereotype.Service;
 public class AqiStatisticsServiceImpl extends ServiceImpl<AqiStatisticsMapper, AqiStatistics> implements AqiStatisticsService {
 
     @Autowired
-    private AqiStatisticsMapper AqiStatisticsMapper;
+    private AqiStatisticsMapper aqiStatisticsMapper;
 
+    @Override
+    public void confirm(AqiStatistics aqiStatistics){
+        aqiStatisticsMapper.insert(aqiStatistics);
+    }
 
 
 }

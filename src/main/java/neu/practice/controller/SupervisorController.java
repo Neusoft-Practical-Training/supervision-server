@@ -21,10 +21,7 @@ public class SupervisorController {
 
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
-
         userService.register(user);
-
-        System.out.println("supervisor = " + user);
         Result result = Result.builder()
                 .code(1)
                 .data(null)
@@ -35,16 +32,7 @@ public class SupervisorController {
 
     @PostMapping("/update")
     public Result update(@RequestBody User user) {
-
-        boolean flag = userService.updateById(user);
-        //
-        if (flag) {
-            System.out.println("Record updated successfully.");
-        } else {
-            System.out.println("Failed to update record.");
-        }
-
-        System.out.println("supervisor = " + user);
+        userService.updateById(user);
         Result result = Result.builder()
                 .code(1)
                 .data(null)
@@ -53,9 +41,12 @@ public class SupervisorController {
         return result;
     }
 
+    /*
+    * 这个参数好像有问题我改了
+     */
     @PostMapping("/feedback")
-    public Result feedback() {
-
+    public Result feedback(@RequestBody AqiFeedback aqiFeedback) {
+        aqiFeedbackService.feedback(aqiFeedback);
         Result result = Result.builder()
                 .code(1)
                 .data(null)
@@ -66,20 +57,13 @@ public class SupervisorController {
 
     @PostMapping("/feedback_info/{page}")
     public Result feedbackInfo(@PathVariable int page) {
-        // 分页查询
+        // 分页查询 接口改一下?, @RequestParam(defaultValue = "10") int size
         IPage<AqiFeedback> p = new Page<>(1, page);
         IPage<AqiFeedback> afPage = aqiFeedbackService.page(p); // 调用 page 方法
-        //
         List<AqiFeedback> afList = afPage.getRecords();
-        long total = afPage.getTotal();
-        System.out.println("Total records: " + total);
-        for (AqiFeedback af : afList) {
-            System.out.println("AqiFeedback: " + af);
-        }
-
         Result result = Result.builder()
                 .code(1)
-                .data(null)
+                .data(afList)
                 .message("supervisor feedback_info; page => " + page)
                 .build();
         return result;

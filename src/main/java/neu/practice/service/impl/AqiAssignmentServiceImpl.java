@@ -15,9 +15,12 @@ import org.springframework.stereotype.Service;
 public class AqiAssignmentServiceImpl extends ServiceImpl<AqiAssignmentMapper, AqiAssignment> implements AqiAssignmentService{
 
     @Autowired
-    private AqiAssignmentMapper AqiAssignmentMapper;
+    private AqiAssignmentMapper aqiAssignmentMapper;
 
-
+    @Override
+    public void assign(AqiAssignment aqiAssignment){
+        aqiAssignmentMapper.insert(aqiAssignment);
+    }
 
 }
 
