@@ -15,7 +15,7 @@ public class User {
     private Integer role;
     private Integer age;
     private String remarks;
-    private Integer status;
+    private Boolean status;
     private String avatar;
     private String create_time;
     private String update_time;
