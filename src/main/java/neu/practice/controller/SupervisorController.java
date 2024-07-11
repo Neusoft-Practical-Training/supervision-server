@@ -19,6 +19,7 @@ public class SupervisorController {
     private UserService userService;
     private AqiFeedbackService aqiFeedbackService;
 
+    // TODO:    deleted
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
         userService.register(user);
@@ -30,6 +31,7 @@ public class SupervisorController {
         return result;
     }
 
+    // TODO:    deleted
     @PostMapping("/update")
     public Result update(@RequestBody User user) {
         userService.updateById(user);
@@ -42,30 +44,46 @@ public class SupervisorController {
     }
 
     /*
-    * 这个参数好像有问题我改了
+     * 这个参数好像有问题我改了
      */
     @PostMapping("/feedback")
     public Result feedback(@RequestBody AqiFeedback aqiFeedback) {
-        aqiFeedbackService.feedback(aqiFeedback);
-        Result result = Result.builder()
-                .code(1)
-                .data(null)
-                .message("supervisor feedback")
+        Result.ResultBuilder builder = Result.builder();
+        try {
+            aqiFeedbackService.feedback(aqiFeedback);
+        } catch (Exception e) {
+            return builder
+                    .code(0)
+                    .message("反馈信息失败，请重试")
+                    .build();
+        }
+        return builder
+                .code(0)
+                .message("反馈信息成功")
                 .build();
-        return result;
     }
 
     @PostMapping("/feedback_info/{page}")
     public Result feedbackInfo(@PathVariable int page) {
-        // 分页查询 接口改一下?, @RequestParam(defaultValue = "10") int size
-        IPage<AqiFeedback> p = new Page<>(1, page);
-        IPage<AqiFeedback> afPage = aqiFeedbackService.page(p); // 调用 page 方法
-        List<AqiFeedback> afList = afPage.getRecords();
-        Result result = Result.builder()
+        Result.ResultBuilder builder = Result.builder();
+        List<AqiFeedback> afList;
+        try {
+            // 分页查询 接口改一下?, @RequestParam(defaultValue = "10") int size
+            IPage<AqiFeedback> p = new Page<>(1, page);
+            IPage<AqiFeedback> afPage = aqiFeedbackService.page(p); // 调用 page 方法
+            afList = afPage.getRecords();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return builder
+                    .code(1)
+                    .message("获取历史信息失败，请重试")
+                    .build();
+        }
+
+        return Result.builder()
                 .code(1)
                 .data(afList)
-                .message("supervisor feedback_info; page => " + page)
+                .message("获取历史信息成功")
                 .build();
-        return result;
     }
 }

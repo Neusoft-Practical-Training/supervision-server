@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GridController {
     @GetMapping("/{grid_id}")
     public Result grids(@PathVariable int grid_id) {
-
+        // TODO：根据区的编号获取区的信息 ？？？ 先别写这个
         Result result = Result.builder()
                 .code(1)
                 .data(null)

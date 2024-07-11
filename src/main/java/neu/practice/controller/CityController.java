@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityController {
     @GetMapping("/{province_id}")
     public Result cities(@PathVariable int province_id){
-
+        // TODO：根据省的id 查询该省所有的城市
         Result result = Result.builder()
                 .code(1)
                 .data(null)
