@@ -1,12 +1,9 @@
 package neu.practice.controllerTest;
 
-import jakarta.annotation.Resource;
-import neu.practice.controller.LoginController;
+import neu.practice.controller.UserController;
 import neu.practice.controller.SupervisorController;
 import neu.practice.entity.User;
 import neu.practice.mapper.UserMapper;
-import neu.practice.service.UserService;
-import neu.practice.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class UserControllerTest {
     @Autowired
-    LoginController loginController;
+    UserController loginController;
     @Autowired
     private UserMapper userMapper;
     @Autowired

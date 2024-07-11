@@ -20,12 +20,19 @@ public class GridMemberController {
      */
     @PostMapping("/confirm")
     public Result confirm(AqiStatistics aqiStatistics) {
-        aqiStatisticsService.confirm(aqiStatistics);
-        Result result = Result.builder()
+        Result.ResultBuilder builder = Result.builder();
+        try {
+            aqiStatisticsService.confirm(aqiStatistics);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return builder
+                    .code(0)
+                    .message("空气质量上传失败， 请重试")
+                    .build();
+        }
+        return builder
                 .code(1)
-                .data(null)
-                .message("grid_member confirm")
+                .message("空气质量上传成功")
                 .build();
-        return result;
     }
 }

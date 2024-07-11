@@ -5,5 +5,5 @@ import neu.practice.entity.AqiAssignment;
 import neu.practice.entity.AqiFeedback;
 
 public interface AqiAssignmentService extends IService<AqiAssignment> {
-    public void assign(AqiAssignment aqiAssignment);
+    void assign(AqiAssignment aqiAssignment);
 }

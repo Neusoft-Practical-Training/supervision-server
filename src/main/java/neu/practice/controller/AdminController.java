@@ -13,17 +13,24 @@ public class AdminController {
 
     @Autowired
     private AqiAssignmentService aqiAssignmentService;
+
     /*
      * 这个参数好像有问题我改了
      */
     @PostMapping("/assign")
-    public Result assign(AqiAssignment aqiAssignment){
-        aqiAssignmentService.assign(aqiAssignment);
-        Result result = Result.builder()
+    public Result assign(AqiAssignment aqiAssignment) {
+        Result.ResultBuilder builder = Result.builder();
+        try {
+            aqiAssignmentService.assign(aqiAssignment);
+        } catch (Exception e) {
+            return builder
+                    .code(0)
+                    .message("指派任务失败，请重试")
+                    .build();
+        }
+        return builder
                 .code(1)
-                .data(null)
-                .message("admin assign")
+                .message("指派任务成功")
                 .build();
-        return result;
     }
 }

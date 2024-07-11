@@ -21,15 +21,23 @@ public class AqiController {
 
     @GetMapping
     public Result getAQI() {
+        Result.ResultBuilder builder = Result.builder();
+        List<Aqi> afList;
         //分页查询
-        IPage<Aqi> p = new Page<>(1, 10);
-        IPage<Aqi> aqiPage = aqiService.page(p); // 调用 page 方法
-        List<Aqi> afList = aqiPage.getRecords();
-        Result result = Result.builder()
+        try {
+            IPage<Aqi> p = new Page<>(1, 10);
+            IPage<Aqi> aqiPage = aqiService.page(p); // 调用 page 方法
+            afList = aqiPage.getRecords();
+        } catch (Exception e) {
+            return builder
+                    .code(0)
+                    .message("获取AQI信息失败")
+                    .build();
+        }
+        return builder
                 .code(1)
                 .data(afList)
-                .message("get aqi")
+                .message("获取AQI信息成功")
                 .build();
-        return result;
     }
 }
