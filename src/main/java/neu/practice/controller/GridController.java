@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GridController {
     @GetMapping("/{grid_id}")
     public Result grids(@PathVariable int grid_id) {
+
         Result result = Result.builder()
                 .code(1)
                 .data(null)
