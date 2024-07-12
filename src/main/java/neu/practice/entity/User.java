@@ -2,10 +2,11 @@ package neu.practice.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import neu.practice.dto.UserDto;
 
 @Data
 @TableName("users")
-public class User {
+public class User extends UserDto {
     private Integer id;
     private String login_code;
     private String password;

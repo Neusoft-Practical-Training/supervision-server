@@ -79,6 +79,8 @@ public class UserController {
         Result.ResultBuilder builder = Result.builder();
 
         Integer role = user.getRole();
+        boolean userRegisterFlag = false;
+        boolean girdMemberRegisterFlag = false;
         if (0 == role) {
             // 管理员不可注册
             return builder
@@ -88,13 +90,39 @@ public class UserController {
                     .build();
         } else if (2 == role) {
             // TODO:注册公众监督员
+            userRegisterFlag = userService.register((User) user);//改bool了
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("注册公众监督员失败")
+                    .build();
         } else if (3 == role) {
             // TODO:注册网格员
+            girdMemberRegisterFlag = gridMemberService.register((GridMember) user);
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("注册网格员失败")
+                    .build();
         }
         // TODO:根据service返回结果 向用户返回注册结果
+        if (userRegisterFlag){
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("注册用户成功")
+                    .build();
+        } else if (girdMemberRegisterFlag) {
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("注册网格员成功")
+                    .build();
+        }
         return null;
     }
 
+    //判断
     @PostMapping("/update")
     public Result update(@RequestBody UserDto user) {
         Result.ResultBuilder builder = Result.builder();
@@ -103,11 +131,31 @@ public class UserController {
 
         Integer role = user.getRole();
         if (0 == role) {
-            // TODO：修改管理员信息
+            // TODO:修改管理员信息
+            adminService.updateById((Admin)user);
+            userService.updateById((User)user);//数据库问题一会你把我注释删了，他的逻辑新建就得存俩表里他整个那个userid
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("修改管理员信息成功")
+                    .build();
         } else if (2 == role) {
-            // TODO: 修改公众监督员信息
+            // TODO:修改公众监督员信息
+            userService.updateById((User)user);
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("修改公众监督员信息成功")
+                    .build();
         } else if (3 == role) {
-            // TODO: 修改网格员信息
+            // TODO:修改网格员信息
+            gridMemberService.updateById((GridMember)user);
+            userService.updateById((User)user);//同上
+            return builder
+                    .code(1)
+                    .data(null)
+                    .message("修改网格员信息成功")
+                    .build();
         }
         return null;
     }
