@@ -19,30 +19,6 @@ public class SupervisorController {
     private UserService userService;
     private AqiFeedbackService aqiFeedbackService;
 
-    // TODO:    deleted
-    @PostMapping("/register")
-    public Result register(@RequestBody User user) {
-        userService.register(user);
-        Result result = Result.builder()
-                .code(1)
-                .data(null)
-                .message("supervisor registered")
-                .build();
-        return result;
-    }
-
-    // TODO:    deleted
-    @PostMapping("/update")
-    public Result update(@RequestBody User user) {
-        userService.updateById(user);
-        Result result = Result.builder()
-                .code(1)
-                .data(null)
-                .message("supervisor registered")
-                .build();
-        return result;
-    }
-
     /*
      * 这个参数好像有问题我改了
      */
@@ -68,7 +44,7 @@ public class SupervisorController {
         Result.ResultBuilder builder = Result.builder();
         List<AqiFeedback> afList;
         try {
-            // 分页查询 接口改一下?, @RequestParam(defaultValue = "10") int size
+            // 分页查询
             IPage<AqiFeedback> p = new Page<>(1, page);
             IPage<AqiFeedback> afPage = aqiFeedbackService.page(p); // 调用 page 方法
             afList = afPage.getRecords();

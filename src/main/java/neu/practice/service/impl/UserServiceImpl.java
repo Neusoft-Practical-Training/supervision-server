@@ -19,7 +19,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         //处理重名
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.allEq(Map.of("login_code", user.getLogin_code()));
@@ -28,8 +28,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new CustomException("1","请注册新用户");
         }
         //新增
-        user.setRole(1);
-        userMapper.insert(user);
+        user.setRole(2);
+        int rows = userMapper.insert(user);
+        return rows > 0;
     }
 
     @Override
@@ -48,8 +49,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public void register(User user) {
-        addUser(user);
+    public boolean register(User user) {
+        return  addUser(user);
     }
 
 }
