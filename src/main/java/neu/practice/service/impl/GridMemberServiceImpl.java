@@ -44,4 +44,11 @@ public class GridMemberServiceImpl extends ServiceImpl<GridMemberMapper, GridMem
         int rows = gridMemberMapper.insert((GridMember) gridMember);
         return rows > 0;
     }
+
+    @Override
+    public GridMember findGridMemberByLoginCode(GridMember gridMember){
+        QueryWrapper<GridMember> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("login_code", gridMember.getLogin_code());
+        return gridMemberMapper.selectOne(queryWrapper);
+    }
 }

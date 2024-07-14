@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User findByLoginCode(User user){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.allEq(Map.of("login_code", user.getLogin_code()));
+        queryWrapper.eq("login_code", user.getLogin_code());
         return userMapper.selectOne(queryWrapper);
     }
 
@@ -50,7 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public boolean register(User user) {
-        return  addUser(user);
+        return addUser(user);
     }
 
 }
