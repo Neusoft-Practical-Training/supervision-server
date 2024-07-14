@@ -134,7 +134,7 @@ public class UserController {
     }
 
     //判断
-    @PostMapping("/update")
+    @PostMapping("/updateUserInfo")
     public Result update(@RequestBody UserDto user) {
         Result.ResultBuilder builder = Result.builder();
 
@@ -145,34 +145,48 @@ public class UserController {
             // TODO:修改管理员信息
             adminService.updateById((Admin) user);
             userService.updateById((User) user);
+            QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("user_id", ((Admin) user).getUser_id());
+            Admin account = adminService.getOne(queryWrapper);
             return builder
                     .code(1)
-                    .data(null)
+                    .data(account)
                     .message("修改管理员信息成功")
                     .build();
         } else if (2 == role) {
             // TODO:修改公众监督员信息
             userService.updateById((User) user);
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("login_code", user.getLogin_code());
+            User account = userService.getOne(queryWrapper);
             return builder
                     .code(1)
-                    .data(null)
+                    .data(account)
                     .message("修改公众监督员信息成功")
                     .build();
         } else if (3 == role) {
             // TODO:修改网格员信息
             gridMemberService.updateById((GridMember) user);
             userService.updateById((User) user);
+            QueryWrapper<GridMember> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("user_id", ((GridMember) user).getUser_id());
+            GridMember account = gridMemberService.getOne(queryWrapper);
             return builder
                     .code(1)
-                    .data(null)
+                    .data(account)
                     .message("修改网格员信息成功")
                     .build();
         }
         return null;
     }
+    @PostMapping("/getProvinces")
+    public Result getProvinces(@RequestBody UserDto user) {
+        Result.ResultBuilder builder = Result.builder();
+
+    }
 
     @PostMapping("/delete")
-    private Result deleteUser(@RequestBody UserDto user) {
+    public Result deleteUser(@RequestBody UserDto user) {
         Result.ResultBuilder builder = Result.builder();
         Integer role = user.getRole();
         if (role == 0) {

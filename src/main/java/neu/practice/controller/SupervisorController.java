@@ -19,24 +19,23 @@ public class SupervisorController {
     private UserService userService;
     private AqiFeedbackService aqiFeedbackService;
 
-    /*
-     * 这个参数好像有问题我改了
-     */
     @PostMapping("/feedback")
     public Result feedback(@RequestBody AqiFeedback aqiFeedback) {
         Result.ResultBuilder builder = Result.builder();
         try {
-            aqiFeedbackService.feedback(aqiFeedback);
+            AqiFeedback feedback = aqiFeedbackService.feedback(aqiFeedback);
+            return builder
+                    .code(1)
+                    .data(feedback)
+                    .message("反馈信息成功")
+                    .build();
+
         } catch (Exception e) {
             return builder
                     .code(0)
                     .message("反馈信息失败，请重试")
                     .build();
         }
-        return builder
-                .code(0)
-                .message("反馈信息成功")
-                .build();
     }
 
     @PostMapping("/feedback_info/{page}")

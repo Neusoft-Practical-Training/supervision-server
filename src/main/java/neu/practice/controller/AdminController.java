@@ -1,6 +1,7 @@
 package neu.practice.controller;
 
 import neu.practice.entity.AqiAssignment;
+import neu.practice.entity.AqiStatistics;
 import neu.practice.service.AqiAssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,5 +33,11 @@ public class AdminController {
                 .code(1)
                 .message("指派任务成功")
                 .build();
+    }
+
+    @PostMapping("/getTask/${taskId}")
+    public Result getTask(AqiStatistics aqiStatistics) {
+        Result.ResultBuilder builder = Result.builder();
+
     }
 }
