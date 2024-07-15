@@ -35,9 +35,5 @@ public class AdminController {
                 .build();
     }
 
-    @PostMapping("/getTask/${taskId}")
-    public Result getTask(AqiStatistics aqiStatistics) {
-        Result.ResultBuilder builder = Result.builder();
 
-    }
 }

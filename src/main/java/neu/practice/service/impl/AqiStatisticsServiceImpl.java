@@ -37,6 +37,14 @@ public class AqiStatisticsServiceImpl extends ServiceImpl<AqiStatisticsMapper, A
         return aqiFeedback;
     }
 
+    @Override
+    public AqiStatistics getAqiStatisticsByAaid(int aaid){
+        QueryWrapper<AqiStatistics> queryWrapper = new QueryWrapper<AqiStatistics>();
+        queryWrapper.eq("aa_id", aaid);
+        return aqiStatisticsMapper.selectOne(queryWrapper);
+    }
+
+
 
 }
 

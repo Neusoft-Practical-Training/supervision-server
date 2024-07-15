@@ -6,4 +6,5 @@ import neu.practice.entity.AqiStatistics;
 
 public interface AqiStatisticsService extends IService<AqiStatistics> {
     public AqiFeedback confirm(AqiStatistics aqiStatistics);
+    public AqiStatistics getAqiStatisticsByAaid(int aaid);
 }

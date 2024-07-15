@@ -179,11 +179,6 @@ public class UserController {
         }
         return null;
     }
-    @PostMapping("/getProvinces")
-    public Result getProvinces(@RequestBody UserDto user) {
-        Result.ResultBuilder builder = Result.builder();
-
-    }
 
     @PostMapping("/delete")
     public Result deleteUser(@RequestBody UserDto user) {
