@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -266,5 +267,29 @@ public class UserController {
                 .data(object)
                 .message("登录成功")
                 .build();
+    }
+
+    @PostMapping("/selectSupervisors")
+    public Result selectSupervisors(@RequestBody String adminId) {
+        Result.ResultBuilder builder = Result.builder();
+        User user = userService.getUserByAdminId(adminId);
+        List<User> list = userService.selectSupervisors(user);
+        return builder.code(1).data(list).build();
+    }
+
+    @PostMapping("/selectAdmins")
+    public Result selectAdmins(@RequestBody String adminId) {
+        Result.ResultBuilder builder = Result.builder();
+        Admin admin = adminService.getById(adminId);
+        List<Admin> list = userService.selectAdmins(admin);
+        return builder.code(1).data(list).build();
+    }
+
+    @PostMapping("/selectGridMembers")
+    public Result selectGridMembers(@RequestBody String adminId) {
+        Result.ResultBuilder builder = Result.builder();
+        GridMember gridMember = userService.getGridMembersByAdminId(adminId);
+        List<GridMember> list = userService.selectGridMembers(gridMember);
+        return builder.code(1).data(list).build();
     }
 }

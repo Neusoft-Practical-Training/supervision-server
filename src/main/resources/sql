@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `gridMembers` (
     `user_id` INTEGER NOT NULL COMMENT '主键&外键：users/user_id',
     `province_id` VARCHAR(255) NOT NULL COMMENT '外键：provinces/province_id',
     `city_id` VARCHAR(255) NOT NULL COMMENT '外键：cities/city_id',
+    `grid_id` VARCHAR(255) NOT NULL COMMENT '外键：grids/grid_id',
     `state` ENUM('0', '1', '2', '3', '4', '5') NOT NULL COMMENT '枚举（0:空闲，1:工作中，2:临时抽调，3:休假，4：待审核，5:其他）',
     `task_num` INTEGER NOT NULL COMMENT '待完成任务数量',
     PRIMARY KEY (`id`)
