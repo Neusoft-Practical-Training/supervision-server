@@ -12,6 +12,7 @@ import neu.practice.service.GridMemberService;
 import neu.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -232,6 +233,32 @@ public class UserController {
         return null;
     }
 
+    @PostMapping("/setUserStatus/${ userId }")
+    public Result setUserStatus(@PathVariable int userid) {
+        Result.ResultBuilder builder = Result.builder();
+        User user = userService.getById(userid);
+        user.setStatus(true);
+        User account = userService.setUserStatus(user);
+        return builder
+                .code(1)
+                .data(account)
+                .message("设置成功")
+                .build();
+    }
+
+
+    @PostMapping("/setUserRemarks")
+    public Result setUserStatus(@PathVariable int userid, String remarks) {
+        Result.ResultBuilder builder = Result.builder();
+        User user = userService.getById(userid);
+        user.setRemarks(remarks);
+        User account = userService.setUserRemarks(user);
+        return builder
+                .code(1)
+                .data(account)
+                .message("设置成功")
+                .build();
+    }
 
     private static Result loginSuccess(Result.ResultBuilder builder, Object object) {
         return builder

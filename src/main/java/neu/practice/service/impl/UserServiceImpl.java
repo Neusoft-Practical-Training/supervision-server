@@ -53,4 +53,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return addUser(user);
     }
 
+    @Override
+    public User setUserStatus(User user){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("login_code", user.getLogin_code());
+        userMapper.update(queryWrapper);
+        return user;
+    }
+
+    @Override
+    public User setUserRemarks(User user){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("login_code", user.getLogin_code());
+        userMapper.update(queryWrapper);
+        return user;
+    }
 }
