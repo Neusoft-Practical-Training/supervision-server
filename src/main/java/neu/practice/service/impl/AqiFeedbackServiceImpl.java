@@ -16,8 +16,9 @@ public class AqiFeedbackServiceImpl extends ServiceImpl<AqiFeedbackMapper, AqiFe
     private AqiFeedbackMapper aqiFeedbackMapper;
 
     @Override
-    public void feedback(AqiFeedback aqiFeedback){
+    public AqiFeedback feedback(AqiFeedback aqiFeedback){
         aqiFeedbackMapper.insert(aqiFeedback);
+        return aqiFeedback;
     }
 
 }

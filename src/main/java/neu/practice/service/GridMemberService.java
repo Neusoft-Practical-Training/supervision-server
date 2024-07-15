@@ -7,4 +7,5 @@ import neu.practice.entity.User;
 public interface GridMemberService extends IService<GridMember> {
     public GridMember login(String login_code, String password);
     public boolean register(User user);
+    public GridMember findGridMemberByLoginCode(GridMember gridMember);
 }
